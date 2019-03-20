@@ -36,6 +36,7 @@ public class Merge {
     // }
     int[] data = new int[] {4, 23, 234, 345, 1, 3 , 54, 234, 134, 3254, 13, 999, 28};
     mergesort(data);
+    System.out.println(Arrays.toString(data));
   }
   public static void mergesort(int[] data) {
     if (data.length == 1) {
@@ -44,23 +45,29 @@ public class Merge {
     mergesortH(data, 0, data.length - 1);
   }
   private static void mergesortH(int[] data, int start, int end) {
-    int[] left = new int[(start + end) / 2];
-    int[] right = new int[data.length - ((start + end) / 2)];
-    int index = 0;
-    for (int i = 0; i < left.length; i++) {
-      left[i] = data[i];
-    }
-    for (int x = (start + end) / 2; x < data.length; x++) {
-      right[index] = data[x];
-      index++;
-    }
-    System.out.println("left: " + Arrays.toString(left));
-    System.out.println("right: " + Arrays.toString(right));
     if (start >= end) {
       return; // means that
     }
     mergesortH(data, start, (start+end)/2);
     mergesortH(data, (start+end)/2 + 1, end);
     // merge
+    merge(data, start, (start + end)/2, end);
+  }
+
+  private static void merge(int[] data, int start, int middle, int end) {
+    int leftSize = middle - start + 1;
+    int rightSize = end - middle;
+    int leftIndex = 0
+    int rightIndex = 0;
+    // temporary arrays to hold the data to sort
+    int[] left = new int[leftSize];
+    int[] right = new int[rightSize];
+
+    for (int i = 0; i < leftSize; i++) {
+      left[i] = data[start + 1];
+    }
+    for (int x = 0; x < rightSize; x++) {
+      right[x] = data[middle + x + 1];
+    }
   }
 }
