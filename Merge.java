@@ -59,18 +59,21 @@ public class Merge {
     int rightSize = end - middle;
     int leftIndex = 0;
     int rightIndex = 0;
-    int Index = 0;
+    int Index = start;
     // temporary arrays to hold the data to sort
     int[] left = new int[leftSize];
     int[] right = new int[rightSize];
 
     for (int i = 0; i < leftSize; i++) {
-      left[i] = data[start + 1];
+      left[i] = data[start + i];
     }
     for (int x = 0; x < rightSize; x++) {
       right[x] = data[middle + x + 1];
     }
-
+    // System.out.println(leftSize);
+    // System.out.println(rightSize);
+    // System.out.println("left: " + Arrays.toString(left));
+    // System.out.println("right: " + Arrays.toString(right));
     // this is to copy the left and right arrays into data
     while (rightIndex < rightSize && leftIndex < leftSize) {
       if (left[leftIndex] <= right[rightIndex]) {
@@ -82,7 +85,7 @@ public class Merge {
       }
       Index++;
     } // have to sopy leftover if one array still has values left
-
+    //System.out.println(Arrays.toString(data));
     while (leftIndex < leftSize) {
       data[Index] = left[leftIndex];
       leftIndex++;
