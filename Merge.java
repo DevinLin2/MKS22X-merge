@@ -46,7 +46,7 @@ public class Merge {
   }
   private static void mergesortH(int[] data, int start, int end) {
     if (start >= end) {
-      return; // means that
+      return; // means that the size of the array covered by start and end is one
     }
     mergesortH(data, start, (start+end)/2);
     mergesortH(data, (start+end)/2 + 1, end);
@@ -57,8 +57,9 @@ public class Merge {
   private static void merge(int[] data, int start, int middle, int end) {
     int leftSize = middle - start + 1;
     int rightSize = end - middle;
-    int leftIndex = 0
+    int leftIndex = 0;
     int rightIndex = 0;
+    int Index = 0;
     // temporary arrays to hold the data to sort
     int[] left = new int[leftSize];
     int[] right = new int[rightSize];
@@ -68,6 +69,30 @@ public class Merge {
     }
     for (int x = 0; x < rightSize; x++) {
       right[x] = data[middle + x + 1];
+    }
+
+    // this is to copy the left and right arrays into data
+    while (rightIndex < rightSize && leftIndex < leftSize) {
+      if (left[leftIndex] <= right[rightIndex]) {
+        data[Index] = left[leftIndex];
+        leftIndex++;
+      } else {
+        data[Index] = right[rightIndex];
+        rightIndex++;
+      }
+      Index++;
+    } // have to sopy leftover if one array still has values left
+
+    while (leftIndex < leftSize) {
+      data[Index] = left[leftIndex];
+      leftIndex++;
+      Index++;
+    }
+
+    while (rightIndex < rightSize) {
+      data[Index] = right[rightIndex];
+      rightIndex++;
+      Index++;
     }
   }
 }
