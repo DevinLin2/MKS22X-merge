@@ -45,7 +45,8 @@ public class Merge {
     mergesortH(data, 0, data.length - 1);
   }
   private static void mergesortH(int[] data, int start, int end) {
-    if (start >= end) {
+    if (end - start < 100) {
+      insertionSort(data, start, end);
       return; // means that the size of the array covered by start and end is one
     }
     mergesortH(data, start, (start+end)/2);
@@ -96,6 +97,18 @@ public class Merge {
       data[Index] = right[rightIndex];
       rightIndex++;
       Index++;
+    }
+  }
+
+  private static void insertionSort(int[] data, int start, int end) {
+    for (int i = start + 1; i <= end; i++){
+      int storage = data[i];
+      int index = i - 1;
+      while(index >= start && storage < data[index]){
+        data[index+1] = data[index];
+        index--;
+      }
+      data[index+1] = storage;
     }
   }
 }
